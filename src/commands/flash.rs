@@ -87,14 +87,17 @@ pub fn cmd_flash(
             );
             return Ok(());
         }
-        println!("firmware CRCs match; the complete-marker still needs validation/recovery.");
-    }
-    println!(
-        "{} block(s) differ and would be erased+rewritten:",
-        changed.len()
-    );
-    for (b, _, _) in &changed {
-        println!("  block {b:#04x}  (flash {:#08x})", (*b as u32) << 16);
+        println!(
+            "firmware CRCs match; checking the complete-marker before deciding whether to write."
+        );
+    } else {
+        println!(
+            "{} block(s) differ and would be erased+rewritten:",
+            changed.len()
+        );
+        for (b, _, _) in &changed {
+            println!("  block {b:#04x}  (flash {:#08x})", (*b as u32) << 16);
+        }
     }
     if !arm {
         println!("\nDRY RUN — nothing was written. Re-run with --arm to flash.");
