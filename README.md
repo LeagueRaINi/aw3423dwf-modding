@@ -36,7 +36,7 @@ installing Dell's monitor driver over the custom modes. They also rename the mon
 
 - Windows. Hardware access goes through Dell's 32-bit `RtHIDlib.dll`, so `awtool` builds for
   `i686-pc-windows-msvc` (this is set in `.cargo/config.toml`).
-- Rust 1.88 or newer: `rustup target add i686-pc-windows-msvc`
+- To build from source: Rust 1.88 or newer, and `rustup target add i686-pc-windows-msvc`
 - Dell's **AW3423DWF firmware update package for M3B107**, from Dell support. Extract it. You need
   - `M3B107\AW3423DWF_M3B107_20240130(ISP).UPG`, the stock firmware (input to `patch`)
   - `Firmware Updater.exe`, `RtHIDlib.dll` and the bundled VC++/MFC DLLs (used by `isp` and `flash`)
@@ -45,7 +45,10 @@ installing Dell's monitor driver over the custom modes. They also rename the mon
 `awtool` stores only SHA-256 hashes of the updater's OEM handshake keys. At runtime it reads the
 keys themselves from your copy of `Firmware Updater.exe`.
 
-## Build
+## Download or build
+
+Prebuilt `awtool.exe` (32-bit, no runtime install needed) and the profiles are on the
+[Releases](https://github.com/LeagueRaINi/aw3423dwf-modding/releases) page. To build it yourself:
 
 ```powershell
 cargo build --release --locked
