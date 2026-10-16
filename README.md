@@ -113,6 +113,33 @@ Verification uses the scaler's hardware CRC-8, which is not a byte-for-byte proo
 
 To go back to stock, flash the stock UPG the same way.
 
+### Backing up flash
+
+`isp dump` reads any flash range, including the golden (factory/boot) image, and writes it to a
+file. It checks every 4 KB chunk against the scaler's hardware CRC. If the dump is interrupted, run
+the same command again: it re-verifies the chunks already saved and continues from where it
+stopped. The ISP register guard rejects any erase or program command, so a dump cannot modify flash.
+
+```powershell
+awtool isp dump 0x000000 0x10000  golden_bank0.bin   # golden image, first 64 KB bank
+awtool isp dump 0x000000 0x1C0000 golden_full.bin    # golden image, all 28 banks
+awtool isp dump 0x400000 0x1C0000 user_image.bin     # currently running user image
+```
+
+ISP reads are very slow, about 11 B/s:
+
+| Range | Size | Approx. time |
+| --- | --- | --- |
+| One 64 KB bank | 64 KB | ~1.5–2 hours |
+| Golden or user image (`0x1C0000`) | 1.75 MB | ~2 days |
+| Whole 8 MB chip | 8 MB | ~9 days |
+
+The OSD and buttons are frozen while a dump runs. If you stop a dump with Ctrl+C, the scaler stays
+halted; run `awtool isp reboot` to bring it back, then rerun the dump to continue. `isp read ADDR
+LEN OUT` reads a small range in a single pass, without resume support.
+
+Dumps contain Dell's firmware. Keep them for your own recovery and analysis, and don't publish them.
+
 ## Commands
 
 | Command | Purpose |
