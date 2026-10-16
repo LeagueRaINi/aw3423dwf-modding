@@ -1,3 +1,7 @@
 # RtHIDlib.dll (Dell's Realtek hub library) is 32-bit, so the tool is built for x86.
 [build]
 target = "i686-pc-windows-msvc"
+
+# Link the C runtime statically so the exe runs without the VC++ redistributable.
+[target.i686-pc-windows-msvc]
+rustflags = ["-C", "target-feature=+crt-static"]

@@ -6,6 +6,7 @@ use std::path::PathBuf;
 #[derive(Parser)]
 #[command(
     name = "awtool",
+    version,
     about = "firmware tooling for the Alienware AW3423DWF (Realtek RTD2717Q)"
 )]
 pub struct Cli {
