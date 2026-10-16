@@ -1,0 +1,15 @@
+/target/
+
+# Dell firmware, binaries and anything read off a monitor must never be committed.
+*.UPG
+*.upg
+*.bin
+*.elf
+*.exe
+*.dll
+*.pdb
+*.i64
+*.id0
+*.id1
+*.nam
+awtool-failed-read.bin

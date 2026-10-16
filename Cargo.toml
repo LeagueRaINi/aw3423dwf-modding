@@ -1,0 +1,19 @@
+[package]
+name = "awtool"
+version = "0.1.0"
+edition = "2024"
+description = "Patch and flash Alienware AW3423DWF (M3B107) monitor firmware"
+license = "MIT"
+publish = false
+
+[dependencies]
+clap = { version = "4.6.7", features = ["derive"] }
+crc = "3.4.0"
+hex-literal = "1.1.0"
+serde = { version = "1.0.229", features = ["derive"] }
+sha2 = "0.10"
+toml = "1.1.8"
+
+# The OEM key scan hashes every window of Dell's updater; unoptimized builds take ~25 s.
+[profile.dev]
+opt-level = 1

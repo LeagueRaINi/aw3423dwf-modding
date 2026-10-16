@@ -1,0 +1,60 @@
+# Historical output-policy test fixture; not a recommended flash profile.
+[pid]
+from = 0xA211
+to = 0xA2E1
+count = 12
+
+[name]
+base = "AW3423DWF"
+suffix = "-CF"
+
+[range]
+max_vhz = 175
+
+[refresh]
+cap_hz = 175
+
+# Stock nominal/fallback refresh and output clock window; only the maxima follow cap_hz.
+[output]
+nominal_hz = 175
+clock_nominal_khz = 1077576
+clock_max_khz = 1083685
+clock_min_khz = 1010205
+
+
+# DisplayID Type-I modes: 3440x1440, Htot 3520 (8/32/40), Vtot 1484 (3/10/31).
+[[mode]]
+label = "175Hz"
+pclk_khz = 914144
+ha = 3440
+hfp = 8
+hsw = 32
+hbl = 80
+va = 1440
+vfp = 3
+vsw = 10
+vbl = 44
+
+[[mode]]
+label = "170Hz"
+pclk_khz = 888026
+ha = 3440
+hfp = 8
+hsw = 32
+hbl = 80
+va = 1440
+vfp = 3
+vsw = 10
+vbl = 44
+
+[[mode]]
+label = "165Hz-10bpc"
+pclk_khz = 861940
+ha = 3440
+hfp = 8
+hsw = 32
+hbl = 80
+va = 1440
+vfp = 3
+vsw = 10
+vbl = 44

@@ -1,0 +1,75 @@
+# 177 Hz + AMD DP FreeSync range raised to 48-177 Hz. EXPERIMENTAL: one unit reports 177 Hz working
+# without frame skipping; 178 Hz and above produce color cycling. Long-term stability and live VRR
+# are not yet tested. Output floor 1590, stock output clock window.
+# Build from Dell's stock M3B107 UPG. Expected output sha256:
+#   0ef141aa78185e0955c3b4aa128367eb7f34bfa105799ac3d2c7f30309195950
+
+# Remap the 12 DELA211..A21C product IDs to DELA2E1..A2EC so Windows Update does not install the
+# Alienware Command Center monitor driver package over the custom modes.
+[pid]
+from = 0xA211
+to = 0xA2E1
+count = 12
+
+# Monitor name "AW3423DWF" -> "AW3423DWF-CF".
+[name]
+base = "AW3423DWF"
+suffix = "-CF"
+
+[range]
+max_vhz = 177
+
+# Firmware refresh ceiling for the input validators, DP output clamps and panel-output cap.
+[refresh]
+cap_hz = 240
+
+# Stock nominal/fallback refresh and output clock window; only the maxima follow cap_hz.
+[output]
+nominal_hz = 165
+clock_nominal_khz = 1016000
+clock_max_khz = 1021760
+clock_min_khz = 1010205
+
+[panel]
+dv_total_min = 1590
+
+# DisplayID Type-I modes: 3440x1440, Htot 3520 (8/32/40), Vtot 1484 (3/10/31).
+[[mode]]
+label = "177Hz"
+pclk_khz = 924591
+ha = 3440
+hfp = 8
+hsw = 32
+hbl = 80
+va = 1440
+vfp = 3
+vsw = 10
+vbl = 44
+
+[[mode]]
+label = "176Hz"
+pclk_khz = 919368
+ha = 3440
+hfp = 8
+hsw = 32
+hbl = 80
+va = 1440
+vfp = 3
+vsw = 10
+vbl = 44
+
+[[mode]]
+label = "175Hz"
+pclk_khz = 914144
+ha = 3440
+hfp = 8
+hsw = 32
+hbl = 80
+va = 1440
+vfp = 3
+vsw = 10
+vbl = 44
+
+# Update both AMD maximum fields in DP templates; keep HDMI at 120 Hz.
+[freesync]
+dp_max_hz = 177
